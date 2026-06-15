@@ -1,0 +1,359 @@
+[
+  {
+    "id": "root",
+    "data": { "first name": "George Joseph", "last name": "Logan", "birthday": "17 June 1918", "gender": "M" },
+    "rels": { "spouses": ["root-spouse"], "children": ["c1", "c2", "c3", "c4"] }
+  },
+  {
+    "id": "root-spouse",
+    "data": { "first name": "Marjorie", "last name": "Lyon", "birthday": "5 March 1921", "gender": "F" },
+    "rels": { "spouses": ["root"], "children": ["c1", "c2", "c3", "c4"] }
+  },
+
+  { 
+    "id": "c1",
+    "data": { "first name": "Marjorie", "last name": "Logan", "birthday": "22 July 1940", "gender": "F" },
+    "rels": { "parents": ["root", "root-spouse"], "spouses": ["c1-spouse"], "children": ["gc1","gc2","gc3","gc4"] }
+  },
+  {
+    "id": "c1-spouse",
+    "data": { "first name": "William", "last name": "Anderson", "birthday": "?", "gender": "M" },
+    "rels": { "spouses": ["c1"], "children": ["gc1","gc2","gc3","gc4"] }
+  },
+    { 
+      "id": "gc1", 
+      "data": { "first name": "Mark", "last name": "Anderson", "birthday": "?", "gender": "M" },
+      "rels": { "parents": ["c1","c1-spouse"], "spouses": ["gc1-spouse"], "children": ["ggc1", "ggc2"] } 
+    },
+    {
+      "id": "gc1-spouse", 
+      "data": { "first name": "Deb", "last name": "?", "birthday": "?", "gender": "F" }, 
+      "rels": { "spouses": ["gc1"], "children": ["ggc1", "ggc2"]}
+    },
+      {
+        "id": "ggc1",
+  	"data": { "first name": "Chris", "last name": "Anderson", "birthday": "?", "gender": "M"},
+  	"rels": { "parents": ["gc1", "gc1-spouse"], "spouses": ["ggc1-spouse"], "children": ["gggc1"]}
+      },
+      {
+        "id": "ggc1-spouse",
+    	"data": { "first name": "Abby", "last name": "?", "birthday": "?", "gender": "F"},
+    	"rels": { "spouses": ["ggc1"], "children": ["gggc1"]}
+      },
+        {
+   	  "id": "gggc1",
+      	  "data": { "first name": "Sean", "last name": "Anderson", "birthday": "? ? 2026", "gender": "M"}, 
+      	  "rels": { "parents": ["ggc1", "ggc1-spouse"] } 
+      	},
+      {
+        "id": "ggc2",
+    	"data": { "first name": "Annalia", "last name": "Anderson", "birthday": "? ? 1996", "gender": "F"},
+    	"rels": { "parents": ["gc1", "gc1-spouse"] }
+      },
+    { 
+      "id": "gc2", 
+      "data": { "first name": "Scott", "last name": "Anderson", "birthday": "?", "gender": "M" }, 
+      "rels": { "parents": ["c1","c1-spouse"], "children": ["dog1"] } 
+    },
+      {
+        "id": "dog1",
+    	"data": { "first name": "Shoog", "last name": " ", "birthday": " ", "gender": "M"},
+    	"rels": {"parents": ["gc2"] }
+      },
+    { 
+      "id": "gc3", 
+      "data": { "first name": "Tracy", "last name": "Anderson", "birthday": "?", "gender": "F" }, 
+      "rels": { "parents": ["c1","c1-spouse"], "spouses": ["gc3-spouse"], "children": ["ggc3", "ggc4", "ggc5"] }
+    },
+    {
+      "id": "gc3-spouse",
+      "data": { "first name": "Frederick", "last name": "Hussey", "birthday": "?", "gender": "M"},
+      "rels": { "spouses": ["gc3"], "children": ["ggc3", "ggc4", "ggc5"] } 
+    },
+      {
+        "id": "ggc3",
+    	"data": { "first name": "Carly", "last name": "Hussey", "birthday": "?", "gender": "F" },
+    	"rels": { "parents": ["gc3", "gc3-spouse"] } 
+      },
+      {
+        "id": "ggc4",
+    	"data": { "first name": "Heather", "last name": "Hussey", "birthday": "?", "gender": "F" },
+    	"rels": { "spouses": ["ggc4-spouse"], "parents": ["gc3", "gc3-spouse"] } 
+      }, 
+      {
+	"id": "ggc4-spouse",
+	"data": { "first name": "Austin", "last name": "O'Connor", "birthday": "?", "gender": "M" },
+	"rels": { "spouses": ["ggc4"] } 
+      },
+      {
+        "id": "ggc5",
+        "data": { "first name": "William", "last name": "Hussey", "birthday": "?", "gender": "M" },
+        "rels": { "parents": ["gc3", "gc3-spouse"] } 
+      },
+    { 
+      "id": "gc4", 
+      "data": { "first name": "Amy", "last name": "Anderson", "birthday": "?", "gender": "F" }, 
+      "rels": { "parents": ["c1","c1-spouse"], "spouses": ["gc4-spouse"], "children": ["ggc6", "ggc7", "ggc8"] } 
+    },
+    {
+      "id": "gc4-spouse",
+      "data": { "first name": "William", "last name": "Crean", "birthday": "?", "gender": "M" },
+      "rels": { "spouses": ["gc4"], "children": ["ggc6", "ggc7", "ggc8"] } 
+    },
+      {
+	"id": "ggc6",
+	"data": { "first name": "Charles", "last name": "Crean", "birthday": "?", "gender": "M" },
+	"rels": { "parents": ["gc4", "gc4-spouse"] } 
+      },
+      {
+	"id": "ggc7",
+	"data": { "first name": "Henry", "last name": "Crean", "birthday": "?", "gender": "M" },
+	"rels": { "parents": ["gc4", "gc4-spouse"] } 
+      },
+      {
+	"id": "ggc8",
+	"data": { "first name": "Aidan", "last name": "Crean", "birthday": "?", "gender": "M" },
+	"rels": { "parents": ["gc4", "gc4-spouse"] } 
+      },
+
+  {
+    "id": "c2",
+    "data": { "first name": "George", "last name": "Logan", "birthday": "10 November 1941", "gender": "M" },
+    "rels": { "parents": ["root","root-spouse"], "spouses": ["c2-spouse"], "children": ["gc5","gc6","gc7"] }
+  },
+  {
+    "id": "c2-spouse",
+    "data": { "first name": "Joanne", "last name": "Walek", "birthday": "27 January 1943", "gender": "F" },
+    "rels": { "spouses": ["c2"], "children": ["gc5","gc6","gc7"] }
+  },
+    { 
+      "id": "gc5", 
+      "data": { "first name": "George", "last name": "Logan", "birthday": "1965", "gender": "M" }, 
+      "rels": { "parents": ["c2","c2-spouse"], "spouses": ["gc5-spouse"], "children": ["ggc9", "ggc10", "ggc11"] } 
+    },
+    {
+      "id": "gc5-spouse",
+      "data": { "first name": "Carolyn", "last name": "Logan", "birthday": "7 March 1967", "gender": "F" },
+      "rels": { "spouses": ["gc5"], "children": ["ggc9", "ggc10", "ggc11"] } 
+    },
+      {
+	"id": "ggc9",
+	"data": { "first name": "Kayla", "last name": "Logan", "birthday": "12 April 1996", "gender": "F" },
+	"rels": { "parents": ["gc5", "gc5-spouse"], "spouses": ["ggc9-spouse"], "children": ["gggc2"] }
+      },
+      {
+	"id": "ggc9-spouse",
+	"data": { "first name": "Kyle", "last name": "Cousens", "birthday": "?", "gender": "M" },
+	"rels": { "spouses": ["ggc9"], "children": ["gggc2"] } 
+      },
+        {
+	  "id": "gggc2",
+	  "data": { "first name": "Kayce", "last name": "Cousens", "birthday": "13 July 2024", "gender": "F" },
+	  "rels": { "parents": ["ggc9", "ggc9-spouse"] } 
+	},
+      {
+	"id": "ggc10",
+	"data": { "first name": "Brielle", "last name": "Logan", "birthday": "?", "gender": "F" },
+	"rels": { "parents": ["gc5", "gc5-spouse"], "spouses": ["ggc10-spouse"] } 
+      },
+      {
+	"id": "ggc10-spouse",
+	"data": { "first name": "Maria", "last name": "Commisso", "birthday": "?", "gender": "F" },
+	"rels": { "spouses": ["ggc10"] } 
+      },
+      {
+	"id": "ggc11",
+	"data": { "first name": "Alex", "last name": "Logan", "birthday": "?", "gender": "M" },
+	"rels": { "parents": ["gc5", "gc5-spouse"] } 
+      },
+    { 
+      "id": "gc6", 
+      "data": { "first name": "John", "last name": "Logan", "birthday": "19 December 1967", "gender": "M" }, 
+      "rels": { "parents": ["c2","c2-spouse"], "spouses": ["gc6-spouse"], "children": ["ggc12", "ggc13"] }
+    },
+    {
+      "id": "gc6-spouse",
+      "data": { "first name": "Alyson", "last name": "Fortin", "birthday": "12 February 1975", "gender": "F" },
+      "rels": { "spouses": ["gc6"], "children": ["ggc12", "ggc13"] } 
+    },
+      {
+	"id": "ggc12",
+	"data": { "first name": "Emma", "last name": "Logan", "birthday": "22 May 2002", "gender": "F" },
+	"rels": { "parents": ["gc6", "gc6-spouse"] }
+      },
+      {
+	"id": "ggc13",
+	"data": { "first name": "Jack", "last name": "Logan", "birthday": "2 November 2003", "gender":"M" },
+	"rels": { "parents": ["gc6", "gc6-spouse"] } 
+      },
+    { 
+      "id": "gc7", 
+      "data": { "first name": "Michael", "last name": "Logan", "birthday": "1969", "gender": "M" }, 
+      "rels": { "parents": ["c2","c2-spouse"], "spouses":["gc7-spouse"], "children": ["ggc14", "ggc15", "ggc16"] } 
+    },
+    {
+      "id": "gc7-spouse",
+      "data": { "first name": "Lindy", "last name": "Holbert", "birthday": "1 January 19XX", "gender": "F" },
+      "rels": { "spouses": ["gc7"], "children": ["ggc14", "ggc15", "ggc16"] } 
+    },
+      {
+	"id": "ggc14",
+	"data": { "first name": "Natalie", "last name": "Logan", "birthday": "XX September, 2004", "gender": "F" },
+	"rels": { "parents": ["gc7", "gc7-spouse"] } 
+      },
+      { 
+	"id": "ggc15",
+	"data": { "first name": "William", "last name": "Logan", "birthday": "?", "gender": "M" },
+	"rels": { "parents": ["gc7", "gc7-spouse"] } 
+      },
+      { 
+	"id": "ggc16",
+	"data": { "first name": "Henry", "last name": "Logan", "birthday": "?", "gender": "M" },
+	"rels": { "parents": ["gc7", "gc7-spouse"] } 
+      },
+
+  { "id": "c3",
+    "data": { "first name": "Patricia", "last name": "Logan", "birthday": "10 April 1947", "gender": "F" },
+    "rels": { "parents": ["root","root-spouse"], "spouses": ["c3-spouse"], "children": ["gc8","gc9"] }
+  },
+  {
+    "id": "c3-spouse",
+    "data": { "first name": "Jim", "last name": "Dickinson", "birthday": "2 October", "gender": "M" },
+    "rels": { "spouses": ["c3"], "children": ["gc8","gc9"] }
+  },
+    { 
+      "id": "gc8", 
+      "data": { "first name": "Jamie", "last name": "Wey", "birthday": "23 October 1967", "gender": "F" }, 
+      "rels": { "parents": ["c3","c3-spouse"], "children": ["ggc17", "ggc18"] } 
+    },
+      {
+        "id": "ggc17",
+	"data": { "first name": "Logan", "last name": "Wey?", "birthday": "12 June 2003", "gender": "M" },
+	"rels": { "parents": ["gc8"] } 
+      },
+      {
+	"id": "ggc18",
+	"data": { "first name": "Tipper", "last name": "Wey", "birthday": "2 November 2007", "gender": "F" },
+	"rels": { "parents": ["gc8"] } 
+      },
+    { 
+      "id": "gc9", 
+      "data": { "first name": "Jennifer", "last name": "Wey", "birthday": "27 September 1970", "gender": "F" }, 
+      "rels": { "parents": ["c3","c3-spouse"], "children": ["ggc19"] }
+    },
+      {
+	"id": "ggc19",
+	"data": { "first name": "Charlie", "last name": "Wey?", "birthday": "28 December 2011", "gender": "F" },
+	"rels": { "parents": ["gc9"] } 
+      },
+  { 
+    "id": "c4",
+    "data": { "first name": "James", "last name": "Logan", "birthday": "8 August 1950", "gender": "M" },
+    "rels": { "parents": ["root","root-spouse"], "spouses": ["c4-spouse"], "children": ["gc10","gc11", "gc12", "gc13"] }
+  },
+  {
+    "id": "c4-spouse",
+    "data": { "first name": "Deborah", "last name": "?", "birthday": "?", "gender": "F" },
+    "rels": { "spouses": ["c4"], "children": ["gc10","gc11", "gc12", "gc13"] }
+  },
+    { 
+      "id": "gc10", 
+      "data": { "first name": "Elise", "last name": "Logan", "birthday": "12 April 19??", "gender": "F" }, 
+      "rels": { "parents": ["c4","c4-spouse"], "children": ["ggc20", "ggc21", "ggc22"] } 
+    },
+      {
+        "id": "ggc20",
+	"data": { "first name": "Hallie", "last name": "?", "birthday": "20 April ????", "gender": "F" },
+	"rels": { "parents": ["gc10"], "children": ["gggc3", "gggc4", "gggc5"] } 
+      },
+        {
+	  "id": "gggc3",
+	  "data": { "first name": "Aiden", "last name": "?", "birthday": "?", "gender": "M" },
+	  "rels": { "parents": ["ggc20"] } 
+	},
+	{
+	  "id": "gggc4",
+	  "data": { "first name": "Kiara", "last name": "?", "birthday": "?", "gender": "M" },
+	  "rels": { "parents": ["ggc20"] } 
+	},
+	{
+	  "id": "gggc5",
+	  "data": {"first name": "Kian", "last name": "?", "birthday": "?", "gender": "M" },
+	  "rels": { "parents": ["ggc20"] } 
+	},
+      {
+	"id": "ggc21",
+	"data": { "first name": "Belle", "last name": "?", "birthday": "19 May XXXX", "gender": "F" },
+	"rels": { "parents": ["gc10"], "children": ["gggc6"] } 
+      },
+        {
+	  "id": "gggc6",
+	  "data": { "first name": "Zakai", "last name": "?", "birthday": "27 September 2024", "gender": "M" },
+	  "rels": { "parents": ["ggc21"] } 
+	},
+      {
+	"id": "ggc22",
+	"data": { "first name": "Nicholas", "last name": "?", "birthday": "2 January XXXX", "gender": "M" },
+	"rels": { "parents": ["gc10"] } 
+      },
+    { 
+      "id": "gc11", 
+      "data": { "first name": "Tamara", "last name": "Logan", "birthday": "?", "gender": "F" }, 
+      "rels": { "parents": ["c4","c4-spouse"], "children": ["ggc23"] } 
+    },
+      {
+	"id": "ggc23",
+	"data": { "first name": "Patrick", "last name": "May", "birthday": "?? May ????", "gender": "M" },
+	"rels": { "parents": ["gc11"] } 
+      },
+    { 
+      "id": "gc12", 
+      "data": { "first name": "Joshua", "last name": "Logan", "birthday": "1 September 1975", "gender": "M" }, 
+      "rels": { "spouses": ["gc12-spouse"], "parents": ["c4","c4-spouse"], "children": ["ggc24", "ggc25"] } 
+    },
+    {
+      "id": "gc12-spouse",
+      "data": { "first name": "Allisson", "last name": "?", "birthday": "?", "gender": "F" },
+      "rels": { "spouses": ["gc12"], "children": ["ggc24", "ggc25"] } 
+    },
+      {  
+	"id": "ggc24",
+	"data": { "first name": "Wyatt", "last name": "Logan", "birthday": "28 September 2009", "gender": "M" },
+	"rels": { "parents": ["gc12", "gc12-spouse"] } 
+      },
+      {
+	"id": "ggc25",
+	"data": { "first name": "Brooks", "last name": "Logan", "birthday": "31 January 2012", "gender": "M" },
+	"rels": { "parents": ["gc12", "gc12-spouse"] } 
+      },
+    { 
+      "id": "gc13", 
+      "data": { "first name": "Jacob", "last name": "Logan", "birthday": "14 June 1978", "gender": "M" }, 
+      "rels": { "spouses": ["gc13-spouse1", "gc13-spouse2"], "parents": ["c4","c4-spouse"], "children": ["ggc26", "ggc27", "ggc28"] } 
+    },
+    {
+      "id": "gc13-spouse1",
+      "data": { "first name": "Angela", "last name": "?", "birthday": "?", "gender": "F" },
+      "rels": { "spouses": ["gc13"], "children": ["ggc26"] } 
+    },
+      {
+	"id": "ggc26",
+	"data": { "first name": "Maxwell", "last name": "Logan", "birthday": "11 July 2007", "gender": "M" },
+	"rels": { "parents": ["gc13", "gc13-spouse1"] }
+      },
+    {
+      "id": "gc13-spouse2",
+      "data": { "first name": "Sheena", "last name": "?", "birthday": "?", "gender": "F" },
+      "rels": { "spouses": ["gc13"], "children": ["ggc27", "ggc28"] } 
+    },
+      {
+	"id": "ggc27",
+	"data": { "first name": "Mills", "last name": "Logan", "birthday": "?", "gender": "M" },
+	"rels": { "parents": ["gc13", "gc13-spouse2"] } 
+      },
+      {
+	"id": "ggc28",
+	"data": { "first name": "Masie", "last name": "Logan", "birthday": "?", "gender": "F" },
+	"rels": { "parents": ["gc13", "gc13-spouse2"] } 
+      }
+]

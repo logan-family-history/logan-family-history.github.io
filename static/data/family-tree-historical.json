@@ -1,0 +1,17 @@
+[
+  {
+    "id": "1",
+    "data": {"first name": "Jacob", "last name": "Doe", "birthday": "1980", "gender": "M"},
+    "rels": {"spouses": ["2"], "children": ["3"]}
+  },
+  {
+    "id": "2",
+    "data": {"first name": "Jane", "last name": "Doe", "birthday": "1982", "gender": "F"},
+    "rels": {"spouses": ["1"], "children": ["3"]}
+  },
+  {
+    "id": "3",
+    "data": {"first name": "Bob", "last name": "Doe", "birthday": "2005", "gender": "M"},
+    "rels": {"parents": ["1", "2"]}
+  }
+]

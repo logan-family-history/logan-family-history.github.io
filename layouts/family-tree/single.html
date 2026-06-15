@@ -1,0 +1,28 @@
+{{ define "main" }}
+<link rel="stylesheet" href="https://unpkg.com/family-chart@latest/dist/styles/family-chart.css">
+
+<article>
+  <h1>{{ .Title }}</h1>
+  {{ .Content }}
+</article>
+
+<div id="FamilyChart" class="f3" style="height:85vh;"></div>
+
+<script src="https://unpkg.com/d3@7"></script>
+<script type="module" src="https://unpkg.com/family-chart@latest"></script>
+
+<script type="module">
+  fetch('{{ .Params.dataFile }}?v={{ now.Unix }}')
+    .then(r => r.json())
+    .then(data => {
+      const f3Chart = f3.createChart('#FamilyChart', data)
+        .setSingleParentEmptyCard(false) 
+      
+      f3Chart.setCardHtml()
+        .setCardDisplay([["first name","last name"],["birthday"]])
+      
+      f3Chart.updateTree({initial: true})
+    })
+    .catch(err => console.error('Failed to load family data:', err))
+</script>
+{{ end }}
