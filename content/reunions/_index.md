@@ -8,4 +8,4 @@ cascade:
 ---
 
 Family reunions!
-Find photos videos, etc.
+Find photos and videos from previous reunions.
