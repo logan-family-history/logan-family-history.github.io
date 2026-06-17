@@ -1,7 +1,7 @@
 ---
 title: "Living Family Tree"
-date: 2026-06-15
 description: "Current family tree"
+type: "family-tree"
 layout: "family-tree"
 dataFile: "/data/family-tree-current.json"
 ---
