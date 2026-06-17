@@ -1,0 +1,85 @@
+theme: hextra
+locale: 'en-us'
+
+enableEmoji: false
+enableRobotsTXT: true
+enableGitInfo: true
+enableInlineShortcodes: true
+hasCJKLanguage: true
+
+outputs:
+  home: [HTML, RSS]
+    #  page: [HTML,]
+    #  section: [HTML, RSS]
+
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
+    extensions:
+      passthrough:
+        delimiters:
+          block: [['\[', '\]'], ['$$', '$$']]
+          inline: [['\(', '\)']]
+        enable: true
+  highlight:
+    noClasses: false
+
+params:
+  description: Homepage of the Logan family history and reunion pages.
+
+  navbar:
+    displayTitle: true 
+    displayLogo: true
+    logo:
+      path: /logan-crest.jpg
+      link: /
+      width: 50
+
+  page:
+    width: default
+
+  theme:
+    default: light
+    displayToggle: true
+
+  footer:
+    enable: true
+    width: normal
+    displayCopyright: true
+    displayPoweredBy: true
+
+  highlight:
+    copy:
+      enable: true
+      display: hover
+
+  comments:
+    enable: false
+
+menu:
+  main:
+    - identifier: family-trees
+      name: Family Trees
+      weight: 1
+    - identifier: about
+      name: About
+      parent: family-trees
+      pageRef: /family-trees
+    - identifier: current
+      name: Current Tree
+      parent: family-trees
+      pageRef: /family-trees/current
+    - identifier: historical
+      name: Historical Tree
+      parent: family-trees
+      pageRef: /family-trees/historical
+    - identifier: reunions
+      name: Reunions
+      pageRef: /reunions
+      weight: 2
+
+
+caches:
+  images:
+    dir: :cacheDir/images
