@@ -40,8 +40,8 @@ params:
     width: default
 
   theme:
-    default: dark
-    displayToggle: false
+    default: system
+    displayToggle: true
 
   footer:
     enable: true

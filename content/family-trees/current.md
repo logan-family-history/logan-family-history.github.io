@@ -12,3 +12,7 @@ I filled everything in using a low resolution picture of Aunt Marji's family tre
 
 It's completely interactive, so click, zoom, drag. 
 Explore the full tree, let me know what you think and help me fill in the remaining blank spots.
+
+<div class="hx-mt12">
+{{<card link="/family-tree-form" title="Notice something wrong?" subtitle="Fill out this form to suggest a fix!">}}
+</div>
