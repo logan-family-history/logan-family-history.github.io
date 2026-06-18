@@ -1,0 +1,363 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Suggest a Family Tree Update</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#16241f;
+    --paper:#f4f6f4;
+    --card:#ffffff;
+    --line:#d8ded8;
+    --accent:#3f6657;
+    --accent-soft:#aebfb6;
+    --gold:#b8932f;
+    --error:#9a3b3b;
+    --radius:10px;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter',-apple-system,Segoe UI,sans-serif;
+    line-height:1.5;
+    padding:40px 20px 80px;
+  }
+  .wrap{max-width:640px;margin:0 auto;}
+  h1{
+    font-family:'Fraunces',Georgia,serif;
+    font-weight:600;
+    font-size:2rem;
+    margin:0 0 6px;
+  }
+  .intro{color:#475650;margin:0 0 36px;max-width:520px;}
+  form{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:32px;
+  }
+  .thread{position:relative;padding-left:24px;}
+  .thread::before{
+    content:'';
+    position:absolute;
+    left:4px; top:6px; bottom:6px;
+    width:2px;
+    background:var(--accent-soft);
+  }
+  .section{margin-bottom:30px;position:relative;}
+  .section:last-child{margin-bottom:0;}
+  .section h2{
+    font-family:'Fraunces',Georgia,serif;
+    font-weight:600;
+    font-size:1.05rem;
+    margin:0 0 14px;
+    position:relative;
+  }
+  .section h2::before{
+    content:'';
+    position:absolute;
+    left:-24px; top:6px;
+    width:8px; height:8px;
+    border-radius:50%;
+    background:var(--accent);
+  }
+  label{display:block;font-size:.85rem;font-weight:500;margin-bottom:5px;color:#3a4742;}
+  .hint{font-size:.78rem;color:#7c8a83;margin-top:4px;}
+  input[type=text], input[type=email], select{
+    width:100%;
+    padding:10px 12px;
+    border:1px solid var(--line);
+    border-radius:7px;
+    font-size:.95rem;
+    font-family:inherit;
+    background:#fbfcfb;
+    color:var(--ink);
+  }
+  input:focus, select:focus{outline:2px solid var(--accent);outline-offset:1px;}
+  .field{margin-bottom:14px;}
+  .row{display:flex;gap:12px;}
+  .row .field{flex:1;}
+  fieldset{border:none;padding:0;margin:0 0 14px;}
+  .radio-group{display:flex;gap:18px;flex-wrap:wrap;}
+  .radio-option{display:flex;align-items:center;gap:6px;font-size:.9rem;}
+  .radio-option input{width:auto;}
+  button{
+    background:var(--accent);
+    color:#fff;
+    border:none;
+    border-radius:7px;
+    padding:13px 22px;
+    font-size:.95rem;
+    font-weight:600;
+    font-family:inherit;
+    cursor:pointer;
+    width:100%;
+  }
+  button:hover{background:#345346;}
+  button:disabled{opacity:.6;cursor:default;}
+  .hidden{display:none !important;}
+  .message{
+    margin-top:18px;
+    padding:12px 14px;
+    border-radius:7px;
+    font-size:.9rem;
+  }
+  .message.success{background:#e9f1ec;color:#2c4a3b;border:1px solid #bcd6c6;}
+  .message.error{background:#f7eaea;color:var(--error);border:1px solid #e3bcbc;}
+  .divider{border:none;border-top:1px solid var(--line);margin:30px 0;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Suggest a Family Tree Update</h1>
+  <p class="intro">Spot something missing or out of date? Fill this out and it'll be submitted for review — nothing changes on the site until it's checked and approved.</p>
+
+  <form id="tree-form">
+    <div class="thread">
+      <div class="section">
+        <h2>What would you like to do?</h2>
+        <fieldset>
+          <div class="radio-group">
+            <label class="radio-option"><input type="radio" name="actionType" value="add_spouse" checked> Add a new family member by marriage/partnership</label>
+            <label class="radio-option"><input type="radio" name="actionType" value="add_child"> Add a new family member as a child</label>
+            <label class="radio-option"><input type="radio" name="actionType" value="edit_person"> Update an existing family member's info</label>
+          </div>
+        </fieldset>
+      </div>
+
+      <!-- Add spouse -->
+      <div class="section" id="section-add_spouse">
+        <h2>Who are they connected to?</h2>
+        <div class="field">
+          <label for="spouse-target">Existing family member they are marrying / partnered with</label>
+          <input type="text" id="spouse-target" list="people-list" placeholder="Start typing a name..." autocomplete="off">
+          <p class="hint">Pick from the dropdown so we can match the right person.</p>
+        </div>
+      </div>
+
+      <!-- Add child -->
+      <div class="section hidden" id="section-add_child">
+        <h2>Who are the parent(s)?</h2>
+        <div class="field">
+          <label for="child-parent1">Parent</label>
+          <input type="text" id="child-parent1" list="people-list" placeholder="Start typing a name..." autocomplete="off">
+        </div>
+        <div class="field">
+          <label for="child-parent2">Parent's spouse/partner (only if they're also in the tree)</label>
+          <input type="text" id="child-parent2" list="people-list" placeholder="Optional" autocomplete="off">
+        </div>
+      </div>
+
+      <!-- Edit existing -->
+      <div class="section hidden" id="section-edit_person">
+        <h2>Who do you want to update?</h2>
+        <div class="field">
+          <label for="edit-target">Existing family member</label>
+          <input type="text" id="edit-target" list="people-list" placeholder="Start typing a name..." autocomplete="off">
+        </div>
+      </div>
+
+      <datalist id="people-list"></datalist>
+
+      <!-- Person fields, shared between add_spouse / add_child -->
+      <div class="section" id="section-new-person">
+        <h2 id="new-person-heading">Their details</h2>
+        <div class="row">
+          <div class="field">
+            <label for="firstName">First name</label>
+            <input type="text" id="firstName">
+          </div>
+          <div class="field">
+            <label for="lastName">Last name</label>
+            <input type="text" id="lastName">
+          </div>
+        </div>
+        <div class="row">
+          <div class="field">
+            <label for="birthday">Birthday</label>
+            <input type="text" id="birthday" placeholder="e.g. 14 June 1978, or leave blank if unknown">
+          </div>
+          <div class="field">
+            <label for="gender">Gender</label>
+            <select id="gender">
+              <option value="">Prefer not to say</option>
+              <option value="F">F</option>
+              <option value="M">M</option>
+            </select>
+          </div>
+        </div>
+        <p class="hint" id="edit-hint">Leave any field blank to keep its current value unchanged.</p>
+      </div>
+
+      <hr class="divider">
+
+      <div class="section">
+        <h2>Your info (optional, but helpful)</h2>
+        <div class="row">
+          <div class="field">
+            <label for="submitterName">Your name</label>
+            <input type="text" id="submitterName">
+          </div>
+          <div class="field">
+            <label for="submitterEmail">Your email</label>
+            <input type="email" id="submitterEmail">
+          </div>
+        </div>
+        <p class="hint">Only used if we have a question about your submission.</p>
+      </div>
+
+      <button type="submit" id="submit-btn">Submit for review</button>
+      <div id="form-message"></div>
+    </div>
+  </form>
+</div>
+
+<script>
+// ---- Configuration ----
+// Update this to wherever the family tree JSON is actually publicly served
+// on your site (it's likely already fetched from here by your tree chart).
+const TREE_DATA_URL = "/data/family-tree-current.json";
+const SUBMIT_URL = "/.netlify/functions/submit-tree-update";
+// ------------------------
+
+let people = [];
+
+function personLabel(p) {
+  const name = `${p.data["first name"] || ""} ${p.data["last name"] || ""}`.trim();
+  const dob = p.data.birthday && p.data.birthday !== "?" ? p.data.birthday : "unknown DOB";
+  return `${name} (${dob}) — ${p.id}`;
+}
+
+function idFromLabel(label) {
+  const match = (label || "").match(/—\s*([\w-]+)\s*$/);
+  return match ? match[1] : null;
+}
+
+async function loadPeople() {
+  try {
+    const res = await fetch(TREE_DATA_URL);
+    people = await res.json();
+    const datalist = document.getElementById("people-list");
+    datalist.innerHTML = people.map((p) => `<option value="${personLabel(p).replace(/"/g, "&quot;")}">`).join("");
+  } catch (e) {
+    showMessage("Could not load the family list — search-by-name won't work, but you can still try submitting.", "error");
+  }
+}
+
+function showMessage(text, type) {
+  const el = document.getElementById("form-message");
+  el.textContent = text;
+  el.className = "message " + type;
+}
+
+function clearMessage() {
+  const el = document.getElementById("form-message");
+  el.textContent = "";
+  el.className = "";
+}
+
+function currentAction() {
+  return document.querySelector('input[name="actionType"]:checked').value;
+}
+
+function updateVisibleSections() {
+  const action = currentAction();
+  document.getElementById("section-add_spouse").classList.toggle("hidden", action !== "add_spouse");
+  document.getElementById("section-add_child").classList.toggle("hidden", action !== "add_child");
+  document.getElementById("section-edit_person").classList.toggle("hidden", action !== "edit_person");
+
+  const newPersonSection = document.getElementById("section-new-person");
+  const heading = document.getElementById("new-person-heading");
+  const editHint = document.getElementById("edit-hint");
+
+  if (action === "edit_person") {
+    heading.textContent = "Updated details";
+    editHint.classList.remove("hidden");
+  } else {
+    heading.textContent = "Their details";
+    editHint.classList.add("hidden");
+  }
+  newPersonSection.classList.remove("hidden");
+}
+
+document.querySelectorAll('input[name="actionType"]').forEach((el) => {
+  el.addEventListener("change", updateVisibleSections);
+});
+
+document.getElementById("tree-form").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  clearMessage();
+
+  const action = currentAction();
+  const payload = {
+    actionType: action,
+    firstName: document.getElementById("firstName").value.trim(),
+    lastName: document.getElementById("lastName").value.trim(),
+    birthday: document.getElementById("birthday").value.trim(),
+    gender: document.getElementById("gender").value,
+    submitterName: document.getElementById("submitterName").value.trim(),
+    submitterEmail: document.getElementById("submitterEmail").value.trim(),
+  };
+
+  if (action === "add_spouse") {
+    const id = idFromLabel(document.getElementById("spouse-target").value);
+    if (!id) return showMessage("Please select an existing family member from the dropdown.", "error");
+    payload.targetId = id;
+    if (!payload.firstName) return showMessage("Please enter a first name for the new family member.", "error");
+  }
+
+  if (action === "add_child") {
+    const id1 = idFromLabel(document.getElementById("child-parent1").value);
+    if (!id1) return showMessage("Please select the parent from the dropdown.", "error");
+    payload.parent1Id = id1;
+    const parent2Raw = document.getElementById("child-parent2").value;
+    if (parent2Raw) {
+      const id2 = idFromLabel(parent2Raw);
+      if (!id2) return showMessage("The second parent doesn't match anyone in the list — pick from the dropdown or leave it blank.", "error");
+      payload.parent2Id = id2;
+    }
+    if (!payload.firstName) return showMessage("Please enter a first name for the new family member.", "error");
+  }
+
+  if (action === "edit_person") {
+    const id = idFromLabel(document.getElementById("edit-target").value);
+    if (!id) return showMessage("Please select an existing family member from the dropdown.", "error");
+    payload.targetId = id;
+  }
+
+  const btn = document.getElementById("submit-btn");
+  btn.disabled = true;
+  btn.textContent = "Submitting...";
+
+  try {
+    const res = await fetch(SUBMIT_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
+    const data = await res.json();
+    if (data.ok) {
+      showMessage(data.message, "success");
+      document.getElementById("tree-form").reset();
+      updateVisibleSections();
+    } else {
+      showMessage(data.error || "Something went wrong. Please try again.", "error");
+    }
+  } catch (err) {
+    showMessage("Could not reach the server. Please try again in a moment.", "error");
+  } finally {
+    btn.disabled = false;
+    btn.textContent = "Submit for review";
+  }
+});
+
+loadPeople();
+updateVisibleSections();
+</script>
+</body>
+</html>
