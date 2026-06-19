@@ -12,7 +12,7 @@ weight: 1
 
 Current family tree descending from George Alexander Logan and Maria Luisa Isabel Boysen Zegri.
 The tree extends five generations below that point and was last updated on 18 June 2026.
-I filled everything in using a low resolution picture of Aunt Marji's family tree from the reunion, light facebook stalking, and filled some gaps off the dome.
+I filled everything in using a low resolution picture of Aunt Margie's family tree from the reunion, light facebook stalking, and filled some gaps off the dome.
 
 The tree under George Joseph is expanded the most.
 His siblings have not been filled out past their spouses, and I think that might make the tree a bit too complicated.
