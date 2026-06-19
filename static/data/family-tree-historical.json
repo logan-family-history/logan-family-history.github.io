@@ -1,17 +1,32 @@
 [
   {
-    "id": "1",
-    "data": {"first name": "Jacob", "last name": "Doe", "birthday": "1980", "gender": "M"},
-    "rels": {"spouses": ["2"], "children": ["3"]}
+    "id": "p",
+    "data": {"first name": "George Alexander", "last name": "Logan", "birthday": "1890?", "gender": "M"},
+    "rels": {"spouses": ["m"], "parents": ["pgm", "pgp"]}
   },
+    {
+      "id": "pgp",
+      "data": {"first name": "Louis Gilead", "last name": "Logan", "birthday": "?", "gender": "M"},
+      "rels": {"spouses": ["pgm"], "children": ["p"]}
+    },
+    {
+      "id": "pgm",
+      "data": {"first name": "Marcella", "last name": "Muldoon", "birthday": "?", "gender": "F"},
+      "rels": {"spouses": ["pgp"], "children": ["p"]}
+    },
   {
-    "id": "2",
-    "data": {"first name": "Jane", "last name": "Doe", "birthday": "1982", "gender": "F"},
-    "rels": {"spouses": ["1"], "children": ["3"]}
+    "id": "m",
+    "data": {"first name": "Maria Louisa Isabel", "last name": "Boysen Zegri", "birthday": "1982", "gender": "F"},
+    "rels": {"spouses": ["p"], "parents": ["mgp", "mgm"]}
   },
-  {
-    "id": "3",
-    "data": {"first name": "Bob", "last name": "Doe", "birthday": "2005", "gender": "M"},
-    "rels": {"parents": ["1", "2"]}
-  }
+    {
+      "id": "mgp",
+      "data": {"first name": "Christian", "last name": "Boysen", "birthday": "1902?", "gender": "M"},
+      "rels": {"spouses": ["mgm"], "children": ["m"]}
+    },
+    {
+      "id": "mgm",
+      "data": {"first name": "?", "last name": "Zegri Martin", "birthday": "?", "gender": "F"},
+      "rels": {"spouses": ["mgp"], "children": ["m"]}
+    }
 ]
