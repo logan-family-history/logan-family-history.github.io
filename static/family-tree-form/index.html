@@ -120,6 +120,14 @@
   <form id="tree-form">
     <div class="thread">
       <div class="section">
+        <h2>Which family tree?</h2>
+        <div class="field">
+          <label for="tree-select">Tree</label>
+          <select id="tree-select"></select>
+        </div>
+      </div>
+
+      <div class="section">
         <h2>What would you like to do?</h2>
         <fieldset>
           <div class="radio-group">
@@ -213,19 +221,34 @@
 
       <button type="submit" id="submit-btn">Submit for review</button>
       <div id="form-message"></div>
+
+      <!-- Honeypot: invisible to real visitors, but bots tend to fill in every field they see. -->
+      <div style="position:absolute;left:-9999px;top:-9999px;" aria-hidden="true">
+        <label for="company">Company</label>
+        <input type="text" id="company" name="company" tabindex="-1" autocomplete="off">
+      </div>
     </div>
   </form>
 </div>
 
 <script>
 // ---- Configuration ----
-// Update this to wherever the family tree JSON is actually publicly served
-// on your site (it's likely already fetched from here by your tree chart).
-const TREE_DATA_URL = "/data/family-tree-current.json";
+// One entry per tree. "id" must match a key in the TREES object in
+// netlify/functions/submit-tree-update.js. Update each dataUrl to wherever
+// that tree's JSON is actually publicly served on your site.
+const TREES = [
+  { id: "tree-a", label: "Family Tree A", dataUrl: "/family-tree-a.json" },
+  { id: "tree-b", label: "Family Tree B", dataUrl: "/family-tree-b.json" },
+];
 const SUBMIT_URL = "/.netlify/functions/submit-tree-update";
 // ------------------------
 
 let people = [];
+
+function currentTree() {
+  const id = document.getElementById("tree-select").value;
+  return TREES.find((t) => t.id === id);
+}
 
 function personLabel(p) {
   const name = `${p.data["first name"] || ""} ${p.data["last name"] || ""}`.trim();
@@ -238,14 +261,26 @@ function idFromLabel(label) {
   return match ? match[1] : null;
 }
 
+function populateTreeSelect() {
+  const select = document.getElementById("tree-select");
+  select.innerHTML = TREES.map((t) => `<option value="${t.id}">${t.label}</option>`).join("");
+  select.addEventListener("change", () => {
+    ["spouse-target", "child-parent1", "child-parent2", "edit-target"].forEach((id) => {
+      document.getElementById(id).value = "";
+    });
+    loadPeople();
+  });
+}
+
 async function loadPeople() {
+  const tree = currentTree();
   try {
-    const res = await fetch(TREE_DATA_URL);
+    const res = await fetch(tree.dataUrl);
     people = await res.json();
     const datalist = document.getElementById("people-list");
     datalist.innerHTML = people.map((p) => `<option value="${personLabel(p).replace(/"/g, "&quot;")}">`).join("");
   } catch (e) {
-    showMessage("Could not load the family list — search-by-name won't work, but you can still try submitting.", "error");
+    showMessage(`Could not load the family list for ${tree.label} — search-by-name won't work, but you can still try submitting.`, "error");
   }
 }
 
@@ -295,6 +330,7 @@ document.getElementById("tree-form").addEventListener("submit", async (e) => {
 
   const action = currentAction();
   const payload = {
+    treeId: currentTree().id,
     actionType: action,
     firstName: document.getElementById("firstName").value.trim(),
     lastName: document.getElementById("lastName").value.trim(),
@@ -302,6 +338,7 @@ document.getElementById("tree-form").addEventListener("submit", async (e) => {
     gender: document.getElementById("gender").value,
     submitterName: document.getElementById("submitterName").value.trim(),
     submitterEmail: document.getElementById("submitterEmail").value.trim(),
+    company: document.getElementById("company").value,
   };
 
   if (action === "add_spouse") {
@@ -343,7 +380,9 @@ document.getElementById("tree-form").addEventListener("submit", async (e) => {
     const data = await res.json();
     if (data.ok) {
       showMessage(data.message, "success");
+      const submittedTreeId = payload.treeId;
       document.getElementById("tree-form").reset();
+      document.getElementById("tree-select").value = submittedTreeId;
       updateVisibleSections();
     } else {
       showMessage(data.error || "Something went wrong. Please try again.", "error");
@@ -356,6 +395,7 @@ document.getElementById("tree-form").addEventListener("submit", async (e) => {
   }
 });
 
+populateTreeSelect();
 loadPeople();
 updateVisibleSections();
 </script>

@@ -14,13 +14,25 @@ const GITHUB_API = "https://api.github.com";
 const OWNER = process.env.GITHUB_OWNER || "your-github-username";
 const REPO = process.env.GITHUB_REPO || "your-repo-name";
 const BASE_BRANCH = process.env.GITHUB_BASE_BRANCH || "main";
-// Path to the JSON file *inside the repo* — update this to match where
-// family-tree-current.json actually lives (e.g. "data/family-tree.json").
-const FILE_PATH = process.env.TREE_FILE_PATH || "data/family-tree.json";
 // A GitHub fine-grained personal access token, scoped to ONLY this repo,
 // with "Contents: Read and write" and "Pull requests: Read and write"
 // permissions. Never commit this — set it as a Netlify env var.
 const TOKEN = process.env.GITHUB_TOKEN;
+
+// Two fully independent trees, each backed by its own JSON file in the
+// repo. The "id" on the left of each entry must match the value sent by
+// the tree picker on the form (see TREES in the form's <script>). Update
+// the paths and labels to match your actual files.
+const TREES = {
+  "tree-a": {
+    label: process.env.TREE_A_LABEL || "Family Tree A",
+    filePath: process.env.TREE_A_FILE_PATH || "data/family-tree-a.json",
+  },
+  "tree-b": {
+    label: process.env.TREE_B_LABEL || "Family Tree B",
+    filePath: process.env.TREE_B_FILE_PATH || "data/family-tree-b.json",
+  },
+};
 // -------------------------------------------------------------------------
 
 function ghHeaders() {
@@ -157,6 +169,19 @@ export const handler = async (event) => {
     return { statusCode: 400, body: JSON.stringify({ ok: false, error: "Invalid request." }) };
   }
 
+  const treeConfig = TREES[payload.treeId];
+  if (!treeConfig) {
+    return { statusCode: 400, body: JSON.stringify({ ok: false, error: "Please select which family tree this change belongs to." }) };
+  }
+  const FILE_PATH = treeConfig.filePath;
+
+  // Honeypot check: a real visitor never sees or fills this field. If it's
+  // filled in, this is almost certainly a bot — pretend success and stop,
+  // so the bot doesn't learn to avoid the field.
+  if ((payload.company || "").trim() !== "") {
+    return { statusCode: 200, body: JSON.stringify({ ok: true, message: "Thanks! Your suggestion was submitted for review." }) };
+  }
+
   try {
     // 1. Read the current file + its sha (needed to commit an update)
     const fileRes = await fetch(
@@ -180,7 +205,7 @@ export const handler = async (event) => {
     });
     if (!refRes.ok) throw new Error("Could not read the base branch.");
     const refData = await refRes.json();
-    const branchName = `family-update-${Date.now()}`;
+    const branchName = `family-update-${payload.treeId}-${Date.now()}`;
     const createRefRes = await fetch(`${GITHUB_API}/repos/${OWNER}/${REPO}/git/refs`, {
       method: "POST",
       headers: ghHeaders(),
@@ -198,7 +223,7 @@ export const handler = async (event) => {
         method: "PUT",
         headers: ghHeaders(),
         body: JSON.stringify({
-          message: `Family tree update: ${summary}`,
+          message: `${treeConfig.label}: ${summary}`,
           content: Buffer.from(newContent, "utf8").toString("base64"),
           sha: fileData.sha,
           branch: branchName,
@@ -212,10 +237,10 @@ export const handler = async (event) => {
       method: "POST",
       headers: ghHeaders(),
       body: JSON.stringify({
-        title: `Family tree: ${summary}`,
+        title: `${treeConfig.label}: ${summary}`,
         head: branchName,
         base: BASE_BRANCH,
-        body: `This pull request was opened automatically from the family tree submission form.\n\n**Change:** ${summary}${submitterNote}\n\nReview the diff, and merge if everything looks correct.`,
+        body: `This pull request was opened automatically from the family tree submission form.\n\n**Tree:** ${treeConfig.label}\n**Change:** ${summary}${submitterNote}\n\nReview the diff, and merge if everything looks correct.`,
       }),
     });
     if (!prRes.ok) throw new Error("Could not open a pull request.");
