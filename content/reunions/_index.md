@@ -3,6 +3,7 @@ title: "Family Reunions"
 description: "Photos and information for family reunions"
 
 cascade:
+  type: docs
   showEdit: false
   showSummary: false
 ---

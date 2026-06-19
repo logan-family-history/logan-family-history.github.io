@@ -1,9 +1,13 @@
 ---
-title: "Living Family Tree"
+title: Current Family Tree
 description: "Current family tree"
 type: "family-tree"
 layout: "family-tree"
 dataFile: "/data/family-tree-current.json"
+
+next: .Next
+prev: .Prev
+weight: 1
 ---
 
 Current family tree descending from George Joseph Logan and Marjorie Lyon.
@@ -13,6 +17,6 @@ I filled everything in using a low resolution picture of Aunt Marji's family tre
 It's completely interactive, so click, zoom, drag. 
 Explore the full tree, let me know what you think and help me fill in the remaining blank spots.
 
-<div class="hx-mt12">
-{{<card link="/family-tree-form" title="Notice something wrong?" subtitle="Fill out this form to suggest a fix!">}}
+<div class="hx:mt-6 hx:mb-6">
+{{<card link="/family-tree-form" title="Notice something wrong?" subtitle="Fill out this form to suggest a fix!" target="_blank">}}
 </div>
