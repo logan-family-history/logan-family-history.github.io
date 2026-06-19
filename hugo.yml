@@ -62,18 +62,7 @@ menu:
     - identifier: family-trees
       name: Family Trees
       weight: 1
-    - identifier: about
-      name: About
-      parent: family-trees
       pageRef: /family-trees
-    - identifier: current
-      name: Current Tree
-      parent: family-trees
-      pageRef: /family-trees/current
-    - identifier: historical
-      name: Historical Tree
-      parent: family-trees
-      pageRef: /family-trees/historical
     - identifier: reunions
       name: Reunions
       pageRef: /reunions
