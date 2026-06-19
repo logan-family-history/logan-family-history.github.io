@@ -10,11 +10,15 @@ prev: .Prev
 weight: 1
 ---
 
-Current family tree descending from George Joseph Logan and Marjorie Lyon.
-The tree extends four generations and was last updated on 15 June 2026.
+Current family tree descending from George Alexander Logan and Maria Luisa Isabel Boysen Zegri.
+The tree extends five generations below that point and was last updated on 18 June 2026.
 I filled everything in using a low resolution picture of Aunt Marji's family tree from the reunion, light facebook stalking, and filled some gaps off the dome.
 
-It's completely interactive, so click, zoom, drag. 
+The tree under George Joseph is expanded the most.
+His siblings have not been filled out past their spouses, and I think that might make the tree a bit too complicated.
+There could also be some loading problems (and lagging) if this tree expands too large.
+
+It's completely interactive, so click, zoom, drag.
 Explore the full tree, let me know what you think and help me fill in the remaining blank spots.
 
 <div class="hx:mt-6 hx:mb-6">

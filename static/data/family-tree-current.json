@@ -1,5 +1,47 @@
 [
   {
+    "id": "p",
+    "data": {
+      "first name": "George Alexander",
+      "last name": "Logan",
+      "birthday": "?",
+      "gender": "M"
+    },
+    "rels": {
+      "spouses": [
+	"m"
+      ],
+      "children": [
+        "root",
+	"s1",
+	"s2",
+	"s3",
+	"s4"
+      ]
+    }
+  },
+  {
+    "id": "m",
+    "data": {
+      "first name": "Maria Luisa Isabel",
+      "last name": "Boysen Zegri",
+      "birthday": "?",
+      "gender": "F"
+    },
+    "rels": {
+      "spouses": [
+	"p"
+      ],
+      "children": [
+	"root",
+	"s1",
+	"s2",
+	"s3",
+	"s4"
+      ]
+    }
+  },
+  {
     "id": "root",
     "data": {
       "first name": "George Joseph",
@@ -16,6 +58,10 @@
         "c2",
         "c3",
         "c4"
+      ],
+      "parents": [
+	"p",
+	"m"
       ]
     }
   },
@@ -36,6 +82,134 @@
         "c2",
         "c3",
         "c4"
+      ]
+    }
+  },
+  {
+    "id": "s1",
+    "data": {
+      "first name": "Marie",
+      "last name": "Logan",
+      "birthday": "26 January 1917",
+      "gender": "F"
+    },
+    "rels": {
+      "spouses": [
+	"s1-s"
+      ],
+      "parents": [
+	"m",
+	"p"
+      ]
+    }
+  },
+  {
+    "id": "s1-s",
+    "data": {
+      "first name": "John",
+      "last name": "Rieb",
+      "birthday": "2 April 1917",
+      "gender": "M"
+    },
+    "rels": {
+      "spouses": [
+	"s1"
+      ]
+    }
+  },
+  {
+    "id": "s2",
+    "data": {
+      "first name": "Gloria",
+      "last name": "Logan",
+      "birthday": "19 May 1922",
+      "gender": "F"
+    },
+    "rels": {
+      "spouses": [
+	"s2-s"
+      ],
+      "parents": [
+	"m",
+	"p"
+      ]
+    }
+  },
+  {
+    "id": "s2-s",
+    "data": {
+      "first name": "Frank",
+      "last name": "Bergmann",
+      "birthday": "27 May 1926",
+      "gender": "M"
+    },
+    "rels": {
+      "spouses": [
+	"s2"
+      ]
+    }
+  },
+  {
+    "id": "s3",
+    "data": {
+      "first name": "William",
+      "last name": "Logan",
+      "birthday": "5 March 1928",
+      "gender": "M"
+    },
+    "rels": {
+      "spouses": [
+        "s3-s"
+      ],
+      "parents": [
+        "m",
+        "p"
+      ]
+    }
+  },
+  {
+    "id": "s3-s",
+    "data": {
+      "first name": "Lois",
+      "last name": "Ann",
+      "birthday": "?",
+      "gender": "F"
+    },
+    "rels": {
+      "spouses": [
+        "s3"
+      ]
+    }
+  },
+  {
+    "id": "s4",
+    "data": {
+      "first name": "Ave Maria",
+      "last name": "Logan",
+      "birthday": "19 December 1930",
+      "gender": "F"
+    },
+    "rels": {
+      "spouses": [
+        "s4-s"
+      ],
+      "parents": [
+        "m",
+        "p"
+      ]
+    }
+  },
+  {
+    "id": "s4-s",
+    "data": {
+      "first name": "William",
+      "last name": "Bareham",
+      "birthday": "?",
+      "gender": "M"
+    },
+    "rels": {
+      "spouses": [
+        "s4"
       ]
     }
   },
