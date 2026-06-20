@@ -1013,6 +1013,9 @@
     "rels": {
       "parents": [
         "gc8"
+      ],
+      "spouses": [
+        "tipper-mitchell"
       ]
     }
   },
@@ -1421,6 +1424,20 @@
       "parents": [
         "gc13",
         "gc13-spouse2"
+      ]
+    }
+  },
+  {
+    "id": "tipper-mitchell",
+    "data": {
+      "first name": "Tipper",
+      "last name": "Mitchell",
+      "birthday": "?",
+      "gender": "F"
+    },
+    "rels": {
+      "spouses": [
+        "ggc18"
       ]
     }
   }
